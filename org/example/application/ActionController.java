@@ -69,12 +69,14 @@ public class ActionController {
 	}
 	
 	private Labeled getLabeledByText(String value, Labeled ...nodes) {
+		Labeled result = null;
 		for(Labeled node: nodes) {
 			if(value.equals(node.getText())) {
-				return node;
+				result = node;
+				break;
 			}
 		}
-		return null;
+		return result;
 	}
 	
 	public void configurePane(TextField field, Button choose, 
