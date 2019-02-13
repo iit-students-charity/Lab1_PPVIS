@@ -1,5 +1,6 @@
 package org.example.application;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -7,7 +8,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -40,22 +40,12 @@ public class InterfaceBuilder {
 		buildFifthPane();
 		configureStage();
 	}
-	
-	private void configureStage() {
-		stage.setScene(scene);
-		stage.setTitle("Lab 1");
-        stage.setWidth(1100);
-        stage.setHeight(600);
-        stage.show();
-	}
-	
+		
 	private void buildFirstPane() {
 		TextField field = builder.getTextField();
 		Button add = builder.getButton("Add");
 		ComboBox<String> items = builder.getComboBox();
-		Pane localPane = builder.getGridPane();
-		localPane.getChildren().addAll(field, add, items);
-		mainPane.getChildren().addAll(localPane);
+		addToMainPane(field, add, items);
 		controller.configurePane(field, add, items);
 	}
 	
@@ -63,9 +53,7 @@ public class InterfaceBuilder {
 		Button apply = builder.getButton("Apply");
 		Button exchange = builder.getButton("Exchange");
 		TextField field = builder.getTextField();
-		Pane localPane = builder.getGridPane();
-		localPane.getChildren().addAll(field, apply, exchange);
-		mainPane.getChildren().addAll(localPane);
+		addToMainPane(field, apply, exchange);
 		controller.configurePane(field, apply, exchange);
 	}
 	
@@ -75,10 +63,8 @@ public class InterfaceBuilder {
 		RadioButton one = builder.getRadioButton("1");
 		RadioButton two = builder.getRadioButton("2");
 		RadioButton three = builder.getRadioButton("3");
-		ToggleGroup group = builder.getToggleGroup(one, two, three);
-		Pane localPane = builder.getGridPane();
-		localPane.getChildren().addAll(field, choose, one, two, three);
-		mainPane.getChildren().addAll(localPane);
+		builder.getToggleGroup(one, two, three);
+		addToMainPane(field, choose, one, two, three);
 		controller.configurePane(field, choose, one, two, three);
 	}
 	
@@ -88,9 +74,7 @@ public class InterfaceBuilder {
 		CheckBox one = builder.getCheckBox("1");
 		CheckBox two = builder.getCheckBox("2");
 		CheckBox three = builder.getCheckBox("3");
-		Pane localPane = builder.getGridPane();
-		localPane.getChildren().addAll(field, choose, one, two, three);
-		mainPane.getChildren().addAll(localPane);
+		addToMainPane(field, choose, one, two, three);
 		controller.configurePane(field, choose, one, two, three);
 	}
 	
@@ -100,10 +84,21 @@ public class InterfaceBuilder {
 		Button add = builder.getButton("Add");
 		Button left = builder.getButton("Left");
 		Button right = builder.getButton("Right");
-		Pane localPane = builder.getGridPane();
-		localPane.getChildren().addAll(field, add, left, right, table);
-		mainPane.getChildren().addAll(localPane);
+		addToMainPane(field, add, left, right, table);
 		controller.configurePane(field, table, add, left, right);
 	}
 	
+	private void addToMainPane(Node ...nodes) {
+		Pane localPane = builder.getPane();
+		localPane.getChildren().addAll(nodes);
+		mainPane.getChildren().add(localPane);
+	}
+	
+	private void configureStage() {
+		stage.setScene(scene);
+		stage.setTitle("Lab 1");
+        stage.setWidth(1200);
+        stage.setHeight(600);
+        stage.show();
+	}	
 }

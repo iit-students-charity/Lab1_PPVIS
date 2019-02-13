@@ -12,9 +12,9 @@ import javafx.scene.layout.VBox;
 
 public class ComponentBuilder {
 	
-	public VBox getGridPane() {
+	public VBox getPane() {
 		VBox defaultGridPane = new VBox();
-		defaultGridPane.setMinSize(200.0, 200.0);
+		defaultGridPane.setMinSize(200.0, 150.0);
 		return defaultGridPane;
 	}
 	
@@ -52,7 +52,7 @@ public class ComponentBuilder {
 	
 	public CheckBox getCheckBox(String nameOfCheckBox) {
 		CheckBox defaultCheckBox = new CheckBox(nameOfCheckBox);
-		defaultCheckBox.setMinSize(30.0, 30.0);
+		defaultCheckBox.setMinSize(25.0, 25.0);
 		return defaultCheckBox;
 	}
 	
@@ -62,8 +62,7 @@ public class ComponentBuilder {
 		TableColumn<Cell, String> secondColumn = new TableColumn<>("Second");
 		defaultTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		defaultTable.getColumns().addAll(firstColumn, secondColumn);
-		defaultTable.setMinSize(200.0, 150.0);
+		defaultTable.setMinSize(150.0, 50.0);
 		return defaultTable;
 	}
-	
 }

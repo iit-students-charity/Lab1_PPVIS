@@ -22,7 +22,8 @@ public class ActionController {
 		alert.showAndWait();
 	}
 	
-	public void configurePane(TextField field, Button add, ComboBox<String> items) {
+	public void configurePane(TextField field, Button add, 
+							  ComboBox<String> items) {
 		add.setOnAction((e) -> {
 			doAction(items, field.getText());
 			field.clear();
@@ -33,7 +34,7 @@ public class ActionController {
 		if(!items.getItems().contains(value)) {
 		    items.getItems().add(value);
 		} else {
-			showMessage("Value: " + value + " is already added");
+			showMessage("Value " + value + " is already added");
 		}
 	}
 	
@@ -50,7 +51,8 @@ public class ActionController {
 		});
 	}
 	
-	public void configurePane(TextField field, Button choose, RadioButton ...buttons) {
+	public void configurePane(TextField field, Button choose, 
+							  RadioButton ...buttons) {
 		choose.setOnAction((e) -> {
 			doAction(field.getText(), buttons);
 			field.clear();
@@ -61,7 +63,7 @@ public class ActionController {
 		RadioButton button = (RadioButton) getLabeledByText(value, buttons);
 		if(button != null) {
 			button.setSelected(true);
-		}else {
+		} else {
 			showMessage("There is no such RadioButton");
 		}
 	}
@@ -75,7 +77,8 @@ public class ActionController {
 		return null;
 	}
 	
-	public void configurePane(TextField field, Button choose, CheckBox ...boxes) {
+	public void configurePane(TextField field, Button choose, 
+							  CheckBox ...boxes) {
 		choose.setOnAction((e) -> {
 			doAction(field.getText(), boxes);
 			field.clear();
@@ -86,12 +89,15 @@ public class ActionController {
 		CheckBox button = (CheckBox) getLabeledByText(value, boxes);
 		if(button != null) {
 			button.setSelected(true);
-		}else {
+		} else {
 			showMessage("There is no such CheckBox");
 		}
 	}
 	
-	public void configurePane(TextField field, TableView<Cell> table, Button add, Button left, Button right) {
+	public void configurePane(TextField field, TableView<Cell> table, 
+							  Button add, Button left, Button right) {
+		setCellFactory(table, 0, "left");
+		setCellFactory(table, 1, "right");
 		add.setOnAction((e) -> {
 			addValue(field.getText(), table);
 			field.clear();
@@ -108,16 +114,15 @@ public class ActionController {
 		});
 	}
 	
+	private void setCellFactory(TableView<Cell> table, int index, 
+								String factory) {
+		TableColumn<Cell, ?> column = table.getColumns().get(index);
+		column.setCellValueFactory(new PropertyValueFactory<>(factory));
+	}
+	
 	private void addValue(String value, TableView<Cell> table) {
-		getColumn(table, 0).setCellValueFactory(new PropertyValueFactory<>("left"));
-		getColumn(table, 1).setCellValueFactory(new PropertyValueFactory<>("right"));
 		ObservableList<Cell> data = table.getItems();
 		data.add(new Cell(value));
 		table.setItems(data);
 	}
-	
-	private TableColumn<Cell, ?> getColumn(TableView<Cell> table, int index){
-		return (TableColumn<Cell, ?>) table.getColumns().get(index);
-	}
-	
 }
