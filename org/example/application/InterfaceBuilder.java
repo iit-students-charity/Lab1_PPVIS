@@ -97,8 +97,6 @@ public class InterfaceBuilder {
 	private void configureStage() {
 		stage.setScene(scene);
 		stage.setTitle("Lab 1");
-        stage.setWidth(1200);
-        stage.setHeight(600);
         stage.show();
 	}	
 }
