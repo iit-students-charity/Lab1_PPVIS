@@ -106,13 +106,17 @@ public class ActionController {
 		});
 		left.setOnAction((e) -> {
 	        int index = table.getSelectionModel().getSelectedIndex();
-	        table.getItems().get(index).toLeft();
-	        table.refresh();
+	        if(index > -1) {
+	        	table.getItems().get(index).toLeft();
+		        table.refresh();
+	        }
 		});
 		right.setOnAction((e) -> {
 			int index = table.getSelectionModel().getSelectedIndex();
-	        table.getItems().get(index).toRight();
-	        table.refresh();
+			if(index > -1) {
+	        	table.getItems().get(index).toRight();
+		        table.refresh();
+	        }
 		});
 	}
 	
