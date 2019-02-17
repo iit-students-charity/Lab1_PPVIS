@@ -35,7 +35,7 @@ public class ComponentBuilder {
 		defaultButton.setTextFill(Color.GOLD);
 		defaultButton.setFont(Font.font(16));
 		String pathToImage = "E:\\Repository\\JavaWeb\\Lab1\\"
-							 + "bin\\resources\\img\\eight.jpg";
+							 + "src\\resources\\img\\eight.jpg";
 		setImage(defaultButton, pathToImage);
 		return defaultButton;
 	}
