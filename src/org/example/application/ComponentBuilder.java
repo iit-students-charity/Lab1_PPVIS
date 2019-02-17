@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,18 +38,32 @@ public class ComponentBuilder {
 		String pathToImage = "E:\\Repository\\JavaWeb\\Lab1\\"
 							 + "src\\resources\\img\\eight.jpg";
 		setImage(defaultButton, pathToImage);
+		setEffect(defaultButton);
 		return defaultButton;
 	}
 	
-	private void setImage(Button button, String pathToImage) {
+	private void setImage(Labeled node, String pathToImage) {
 		try(InputStream input = new FileInputStream(pathToImage)) {
 			ImageView image = new ImageView(new Image(input));
-			image.setFitWidth(100.0);
-		    image.setFitHeight(45.0);
-		    button.setGraphic(image);
+			image.setFitWidth(node.getMaxWidth());
+		    image.setFitHeight(node.getMaxHeight());
+		    node.setGraphic(image);
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void setEffect(Button button) {
+		button.setOnMouseEntered((e) -> {
+			String pathToImage = "E:\\Repository\\JavaWeb\\Lab1\\"
+					 + "src\\resources\\img\\eight_entered.png";
+			setImage(button, pathToImage);
+		});
+		button.setOnMouseExited((e) -> {
+			String pathToImage = "E:\\Repository\\JavaWeb\\Lab1\\"
+					 + "src\\resources\\img\\eight.jpg";
+			setImage(button, pathToImage);
+		});
 	}
 	
 	public TextField getTextField() {
