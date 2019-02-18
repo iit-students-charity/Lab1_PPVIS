@@ -22,6 +22,13 @@ import javafx.scene.text.Font;
 
 public class ComponentBuilder {
 	
+	private String pathToProject; 
+	
+	public ComponentBuilder() {
+		pathToProject = System.getProperty("user.dir")
+						+ "\\src\\resources\\img\\";
+	}
+	
 	public VBox getPane() {
 		VBox defaultGridPane = new VBox();
 		defaultGridPane.setMinSize(200.0, 150.0);
@@ -35,8 +42,7 @@ public class ComponentBuilder {
 		defaultButton.setContentDisplay(ContentDisplay.CENTER);
 		defaultButton.setTextFill(Color.GOLD);
 		defaultButton.setFont(Font.font(16));
-		String pathToImage = "E:\\Repository\\JavaWeb\\Lab1\\"
-							 + "src\\resources\\img\\eight.jpg";
+		String pathToImage = pathToProject + "eight.jpg";
 		setImage(defaultButton, pathToImage);
 		setEffect(defaultButton);
 		return defaultButton;
@@ -55,13 +61,11 @@ public class ComponentBuilder {
 	
 	private void setEffect(Button button) {
 		button.setOnMouseEntered((e) -> {
-			String pathToImage = "E:\\Repository\\JavaWeb\\Lab1\\"
-					 + "src\\resources\\img\\eight_entered.png";
+			String pathToImage = pathToProject + "eight_entered.png";
 			setImage(button, pathToImage);
 		});
 		button.setOnMouseExited((e) -> {
-			String pathToImage = "E:\\Repository\\JavaWeb\\Lab1\\"
-					 + "src\\resources\\img\\eight.jpg";
+			String pathToImage = pathToProject + "eight.jpg";
 			setImage(button, pathToImage);
 		});
 	}
